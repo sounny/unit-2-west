@@ -1,6 +1,7 @@
 /*Add CSS styles here*/
 
 #map { 
+<<<<<<< Updated upstream
     height : 600px;
     width: 100%;
     display:inline-block;
@@ -21,10 +22,30 @@
 
 .step {  
     width: 20%;  
+=======
+    height : 700px;
+    width: 80%;
+    display:inline-block;
+    
+}
+
+
+
+.range-slider {  
+    width: 250px;  
+}  
+
+.step {  
+    width: 40px;  
+>>>>>>> Stashed changes
 }  
 
 .step img {  
     width: 100%;  
+<<<<<<< Updated upstream
+=======
+    height: auto;
+>>>>>>> Stashed changes
 }  
 
 #forward {  
@@ -35,8 +56,52 @@
     float: left;  
 }
 
+<<<<<<< Updated upstream
 
 .leaflet-popup-content p {
     margin: 0.2em 0;
     
 };
+=======
+.sequence-control-container {  
+    width: 350px;  
+    height: 30px;  
+    background-color: rgba(255,255,255,.7);  
+    padding: 10px;  
+    line-height: 45px;  
+    text-align: center;  
+    border: solid rgb(128, 128, 128) 1px;  
+}  
+
+.legend-control-container {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255,255,255,.7);  
+    padding: 1px;
+    text-align: center;
+    
+    border: solid gray 1px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+    font-weight: bolder;
+    background-color: brown;
+    color: burlywood;
+}
+
+.suppText {
+    float:right;
+    width: 16%;
+    background-color: rgb(166, 43, 43, 0.5);
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    word-wrap:break-word;
+    
+}
+>>>>>>> Stashed changes
