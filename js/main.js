@@ -2,23 +2,16 @@
 
 //declare map var in global scope
 var map;
-<<<<<<< Updated upstream
-var minValue;
-=======
 var dataStats = {};
 var minValue;
 var ScaleControl
->>>>>>> Stashed changes
+
 //function to instantiate the Leaflet map
 function createMap(){
     //create the map
     map = L.map('map', {
         center: [40, -97],
-<<<<<<< Updated upstream
-        zoom: 4.49
-=======
         zoom: 4
->>>>>>> Stashed changes
     });
 
     //add OSM base tilelayer
@@ -30,23 +23,13 @@ function createMap(){
     getData(map);
 };
 
-<<<<<<< Updated upstream
-function createSequenceControls(attributes){
-    //create range input element (slider)
-    var slider = "<input class='range-slider' type='range'></input>";
-    document.querySelector("#panel").insertAdjacentHTML('beforeend', slider);
-    
-    //set slider attributes
-=======
 function createScale(){
     ScaleControl = L.control.scale({
-        options:{
-            maxWidth: 50,
-            position: 'bottomleft',
-            metric : true,
-            imperial: true,
-        },
-    }).addTo(map)
+        maxWidth: 50,
+        position: 'bottomleft',
+        metric: true,
+        imperial: true
+    }).addTo(map);
 };
 
 function createSequenceControls(attributes){   
@@ -69,22 +52,15 @@ function createSequenceControls(attributes){
             L.DomEvent.disableClickPropagation(container);
             return container;
         }
-
     });
 
-    map.addControl(new SequenceControl());    // add listeners after adding control}
->>>>>>> Stashed changes
+    map.addControl(new SequenceControl());    // add listeners after adding control
+
     document.querySelector(".range-slider").max = 24;
     document.querySelector(".range-slider").min = 0;
     document.querySelector(".range-slider").value = 0;
     document.querySelector(".range-slider").step = 1;
-<<<<<<< Updated upstream
-    document.querySelector('#panel').insertAdjacentHTML('beforeend','<button class="step" id="reverse">Reverse</button>');
-    document.querySelector('#panel').insertAdjacentHTML('beforeend','<button class="step" id="forward">Forward</button>');
-    document.querySelector('#reverse').insertAdjacentHTML('beforeend',"<img src='img/reverse.png'>")
-    document.querySelector('#forward').insertAdjacentHTML('beforeend',"<img src='img/forward.png'>")
-=======
->>>>>>> Stashed changes
+
     document.querySelector('.range-slider').addEventListener('input', function(){
         //Step 6: get the new index value
         var index = this.value;
@@ -111,15 +87,6 @@ function createSequenceControls(attributes){
             updatePropSymbols(attributes[index]);
         })
     })
-<<<<<<< Updated upstream
-    
-};
-
-function updatePropSymbols(attribute){
-    map.eachLayer(function(layer){
-        if (layer.feature && layer.feature.properties[attribute]){
-            //access feature properties
-=======
 }
 
 function createLegend(){
@@ -167,9 +134,7 @@ function createLegend(){
     });
 
     map.addControl(new LegendControl());
-
 }
-
 
 function updatePropSymbols(attribute){
     var year = attribute.split("_")[1];
@@ -177,9 +142,6 @@ function updatePropSymbols(attribute){
     map.eachLayer(function(layer){
         if (layer.feature && layer.feature.properties[attribute]){
             //access feature properties
-            
-            
->>>>>>> Stashed changes
             var props = layer.feature.properties;
 
             //update each feature's radius based on new attribute values
@@ -187,24 +149,11 @@ function updatePropSymbols(attribute){
             layer.setRadius(radius);
 
             //add city to popup content string
-<<<<<<< Updated upstream
-            var popupContent = "<p><b>City:</b> " + props["Core Based Statistical Area"] + "</p>";
-
-            //add formatted attribute to panel content string
-            var year = attribute.split("_")[1];
-            popupContent += "<p><b>Weighted Annual Mean of PM2.5 in  " + year + ":</b> is " + props[attribute] + " per µg/m3</p>";
-
-            //update popup content            
-            popup = layer.getPopup();            
-            popup.setContent(popupContent).update();
-=======
             var popupContent = new PopupContent(props, attribute);
 
             //update popup with new content    
             popup = layer.getPopup();    
             popup.setContent(popupContent.formatted).update();
-            
->>>>>>> Stashed changes
         };
     });
 };
@@ -216,19 +165,11 @@ function pointToLayer(feature, latlng, attributes){
     console.log(attribute)
     //create marker options
     var options = {
-<<<<<<< Updated upstream
-        fillColor: "#ff7800",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-=======
         fillColor: "#993b3b",
         color: "#000",
         weight: 0,
         opacity: 1,
         fillOpacity: 0.6
->>>>>>> Stashed changes
     };
 
     //For each feature, determine its value for the selected attribute
@@ -241,30 +182,16 @@ function pointToLayer(feature, latlng, attributes){
     var layer = L.circleMarker(latlng, options);
 
     //build popup content string
-<<<<<<< Updated upstream
-    var popupContent = "<p><b>City:</b> " + feature.properties["Core Based Statistical Area"] + "</p>";
-    var year = attribute.split("_")[1];
-    popupContent += "<p><b>Weighted Annual Mean of PM2.5 in  " + year + ":</b> is " + feature.properties[attribute] + " per µg/m3</p>";
-    //bind the popup to the circle marker
-    layer.bindPopup(popupContent, {
-        offset: new L.Point(0,-options.radius) 
-=======
     var popupContent = new PopupContent(feature.properties, attribute);
 
     //bind the popup to the circle marker    
     layer.bindPopup(popupContent.formatted, { 
         offset: new L.Point(0,-options.radius)
->>>>>>> Stashed changes
     });
 
     //return the circle marker to the L.geoJson pointToLayer option
     return layer;
 };
-
-
-
-<<<<<<< Updated upstream
-=======
 
 function PopupContent(properties, attribute){
     this.properties = properties;
@@ -274,9 +201,6 @@ function PopupContent(properties, attribute){
     this.formatted = "<p><b>City:</b> " + this.properties["Core Based Statistical Area"] + "</p><p><b>Weighted Annual Mean of PM2.5 in  " + this.year + ":</b> is " + this.anmean + " per µg/m3</p>";
 };
 
-
-
->>>>>>> Stashed changes
 function calculateMinValue(data){
     //create empty array to store all data values
     var allValues = [];
@@ -304,7 +228,6 @@ function calcPropRadius(attValue) {
 
     return radius;
 };
-
 
 //Add circle markers for point features to the map
 function createPropSymbols(data, attributes){
@@ -337,8 +260,6 @@ function processData(data){
     return attributes;
 };
 
-<<<<<<< Updated upstream
-=======
 function calcStats(data){
     //create empty array to store all data values
     var allValues = [];
@@ -358,11 +279,8 @@ function calcStats(data){
     //calculate meanValue
     var sum = allValues.reduce(function(a, b){return a+b;});
     dataStats.mean = sum/ allValues.length;
-
 }    
 
-
->>>>>>> Stashed changes
 //Step 2: Import GeoJSON data
 function getData(){
     //load the data
@@ -372,25 +290,15 @@ function getData(){
         })
         .then(function(json){
             //calculate minimum data value
-<<<<<<< Updated upstream
-            var attributes = processData(json);
-            minValue = calculateMinValue(json);
-            //call function to create proportional symbols
-            createPropSymbols(json, attributes);
-            createSequenceControls(attributes);
-=======
-           
             var attributes = processData(json);
             minValue = calculateMinValue(json);
             calcStats(json);
             //call function to create proportional symbols
-            
             createPropSymbols(json, attributes);
             createSequenceControls(attributes);
             createLegend(attributes);
             createScale();
-            
->>>>>>> Stashed changes
         })
 };
+
 document.addEventListener('DOMContentLoaded',createMap)
